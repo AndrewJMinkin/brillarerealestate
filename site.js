@@ -29,8 +29,8 @@ if (menu && nav) {
   });
 }
 
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  for (const counter of document.querySelectorAll("[data-count]")) {
+if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  function animateCounter(counter) {
     const digits = counter.firstChild;
     const total = Number(digits.textContent);
     counter.setAttribute("aria-label", counter.textContent);
@@ -43,4 +43,12 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     }
     requestAnimationFrame(count);
   }
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      observer.unobserve(entry.target);
+      animateCounter(entry.target);
+    }
+  }, { threshold: 0.5 });
+  document.querySelectorAll("[data-count]").forEach(counter => observer.observe(counter));
 }
