@@ -105,12 +105,23 @@ category.addEventListener("change", () => {
 function showView(focus = false) {
   const view = window.location.hash.slice(1);
   const isCourse = view === "core" || view === "bonus";
+  const showAllPreview =
+    document.body.dataset.portalPreview === "true" && !view;
   document.getElementById("portal-home").hidden =
-    isCourse || view === "announcements";
-  document.getElementById("curriculum-view").hidden = !isCourse;
+    !showAllPreview && (isCourse || view === "announcements");
+  document.getElementById("curriculum-view").hidden =
+    !(isCourse || showAllPreview);
   document.getElementById("announcements-view").hidden =
-    view !== "announcements";
-  if (isCourse) {
+    view !== "announcements" && !showAllPreview;
+  if (showAllPreview) {
+    category.value = "all";
+    search.value = "";
+    document.getElementById("curriculum-title").textContent = "Course Library";
+    document.getElementById("curriculum-kicker").textContent =
+      "Core curriculum / Bonus modules";
+    document.getElementById("curriculum-description").textContent =
+      "Explore the full self-paced curriculum, then catch up on the latest news and opportunities below.";
+  } else if (isCourse) {
     category.value = view;
     search.value = "";
     document.getElementById("curriculum-title").textContent =
