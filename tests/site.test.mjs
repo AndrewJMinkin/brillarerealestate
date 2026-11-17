@@ -12,7 +12,7 @@ async function setup(page, script, client) {
   });
   dom.window.getClient = async () => client;
   dom.window.localUrl = (file) => new URL(file, dom.window.location.href).href;
-  dom.window.eval(read(script).replace(/^import .*;\n/m, ""));
+  await dom.window.eval("(async () => {" + read(script).replace(/^import .*;\n/m, "") + "})()");
   await tick();
   await tick();
   return dom.window;
@@ -115,7 +115,8 @@ test("authenticated portal renders safe text, filters lessons, rejects unsafe UR
   assert.equal(doc.querySelectorAll(".lesson-row").length, 3);
   assert.equal(doc.querySelectorAll(".lesson-row img").length, 0);
   assert.equal(doc.querySelectorAll(".lesson-row a").length, 1);
-  assert.equal(doc.querySelectorAll(".pending").length, 2);
+  assert.equal(doc.querySelectorAll("button.pending:disabled").length, 2);
+  assert.match(doc.querySelector("button.pending").textContent, /Start Lesson/);
   assert.equal(doc.querySelector("#welcome b"), null);
   const category = doc.getElementById("lesson-category");
   category.value = "bonus";
@@ -238,5 +239,26 @@ test('screenshot curriculum and announcements navigate through all three destina
   assert.equal(doc.getElementById('portal-home').hidden, false);
   client.emit('SIGNED_OUT');
   assert.equal(doc.querySelectorAll('.announcement').length, 0);
+  win.close();
+});
+test('public design preview shows screenshot modules with disabled lesson buttons', async () => {
+  const { portalPreview } = await import('../portal-preview-data.js');
+  const dom = new JSDOM(read('student-portal-preview.html'), {url:'https://example.test/student-portal-preview.html#core',runScripts:'outside-only'});
+  const win = dom.window;
+  win.previewFixture = portalPreview;
+  win.getClient = () => { throw new Error('Preview must not access student accounts'); };
+  const script = read('portal.js').replace(/^import .*;\n/m, '').replace('await import("./portal-preview-data.js")','({portalPreview: window.previewFixture})');
+  await win.eval('(async () => {' + script + '})()');
+  const doc = win.document;
+  assert.equal(doc.getElementById('portal-content').hidden, false);
+  assert.equal(doc.querySelectorAll('.module-card').length, 4);
+  assert.equal(doc.querySelectorAll('button.lesson-placeholder:disabled').length, 4);
+  assert.ok([...doc.querySelectorAll('button.lesson-placeholder')].every(button=>button.textContent === 'Start Lesson →'));
+  win.location.hash = 'bonus'; await tick(); await tick();
+  assert.equal(doc.querySelectorAll('.module-card').length, 6);
+  assert.equal(doc.querySelectorAll('.module-card a').length, 0);
+  win.location.hash = 'announcements'; await tick(); await tick();
+  assert.match(doc.querySelector('.announcement').textContent, /End of School Workshop!/);
+  assert.equal(doc.querySelector('.announcement time').dateTime, '2026-05-05');
   win.close();
 });

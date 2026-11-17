@@ -83,11 +83,15 @@ function render() {
       link.setAttribute("aria-label", `Open lesson: ${lesson.title}`);
       row.append(link);
     } else {
-      const pending = document.createElement("span");
-      pending.className = "pending";
+      const pending = document.createElement("button");
+      pending.type = "button";
+      pending.disabled = true;
+      pending.setAttribute("aria-label", `Start lesson: ${lesson.title} — link coming soon`);
+      pending.className = "btn pending lesson-placeholder";
       pending.textContent = lesson.title.startsWith("Coming Soon")
         ? "Coming soon"
-        : "Lesson link coming soon";
+        : "Start Lesson →";
+      pending.title = "Lesson link coming soon";
       row.append(pending);
     }
     list.append(row);
@@ -188,6 +192,11 @@ async function init() {
         "https://www.brillarescholars.com/student-portal",
         "Open existing portal ↗",
       );
+      const preview = document.createElement("a");
+      preview.className = "text-link portal-preview-link";
+      preview.href = "student-portal-preview.html";
+      preview.textContent = "Preview the new Student Portal →";
+      status.append(document.createElement("br"), preview);
       return;
     }
     client.auth.onAuthStateChange((event, session) => {
@@ -249,4 +258,15 @@ async function init() {
     );
   }
 }
-init();
+if (document.body.dataset.portalPreview === "true") {
+  const { portalPreview } = await import("./portal-preview-data.js");
+  lessons = portalPreview.lessons;
+  announcements = portalPreview.announcements;
+  status.hidden = true;
+  content.hidden = false;
+  logout.hidden = true;
+  renderAnnouncements();
+  showView();
+} else {
+  init();
+}

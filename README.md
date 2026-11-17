@@ -26,3 +26,7 @@ Lesson links pointing to external public files are not themselves protected by p
 `node --test tests/site.test.mjs` checks links, configuration guardrails, auth and portal behavior with a fake provider (never real student accounts), and database policy requirements. Backend integration still requires the live checks above.
 
 Preserved content: program descriptions, mission, team members and photos, contact and existing legal links. `architecture.svg` is original vector artwork.
+
+## Portal design preview
+
+Open `student-portal-preview.html` to review the screenshot-based catalog without configuring an account service. This intentionally public preview contains only module descriptions and announcements; every lesson URL is null and lesson buttons are disabled placeholders. The authenticated portal and its database policies are unchanged. The unconfigured portal links to this preview.
