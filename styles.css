@@ -478,8 +478,8 @@ nav .btn {
   text-decoration: underline;
 }
 .join-band {
-  background: var(--accent);
-  border-block: 1px solid #bacd9d;
+  background: #e5edfc;
+  border-block: 1px solid #bccce8;
 }
 .join-layout {
   display: grid;

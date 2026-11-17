@@ -28,3 +28,19 @@ if (menu && nav) {
     if (e.matches) closeMenu();
   });
 }
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  for (const counter of document.querySelectorAll("[data-count]")) {
+    const digits = counter.firstChild;
+    const total = Number(digits.textContent);
+    counter.setAttribute("aria-label", counter.textContent);
+    digits.textContent = "0";
+    const start = performance.now();
+    function count(now) {
+      const progress = Math.min(1, Math.max(0, (now - start) / 1400));
+      digits.textContent = String(Math.floor(total * (1 - (1 - progress) ** 2)));
+      if (progress < 1) requestAnimationFrame(count);
+    }
+    requestAnimationFrame(count);
+  }
+}
