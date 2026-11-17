@@ -1210,3 +1210,194 @@ form .btn {
   transform: rotate(-45deg);
   font-family: Arial, sans-serif;
 }
+
+/* Student studio: original portal structure, architectural presentation. */
+.portal-heading > p {
+  max-width: 440px;
+  line-height: 1.8;
+}
+.portal-destinations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+}
+.portal-destination {
+  padding: 32px;
+  min-height: 330px;
+  background: #edf2f5;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  transition: background 0.2s;
+}
+.portal-destination:last-child {
+  border-right: 0;
+}
+.portal-destination:hover {
+  background: #e0eafa;
+}
+.portal-destination h3 {
+  font-size: 28px;
+  margin: 24px 0 12px;
+}
+.portal-destination p {
+  font-size: 13px;
+  color: var(--muted);
+}
+.bonus-destination {
+  background: #f0f1e6;
+}
+.news-destination {
+  background: #eeedf3;
+}
+.draft-icon {
+  font: 36px/1 monospace;
+  color: var(--blue);
+  border: 1px solid #acbfce;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+}
+.destination-action {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid #becbd3;
+}
+.portal-return {
+  margin: 0 0 40px;
+}
+#curriculum-view,
+#announcements-view {
+  scroll-margin-top: 110px;
+}
+#curriculum-title,
+#announcements-title {
+  scroll-margin-top: 110px;
+}
+.lesson-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  border: 0;
+}
+.module-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 32px;
+  min-height: 330px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue);
+  background: #fff;
+}
+.module-card::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 15px, #2458a61a 15px 16px),
+    repeating-linear-gradient(0deg, transparent 0 15px, #2458a61a 15px 16px);
+  pointer-events: none;
+}
+.module-card[data-category="bonus"] {
+  border-top-color: #849559;
+  background: #fdfdf9;
+}
+.module-number {
+  margin-bottom: 24px;
+  font: 14px monospace;
+}
+.module-card h3 {
+  font-size: 30px;
+  max-width: 85%;
+  margin: 12px 0 18px;
+}
+.module-card p {
+  max-width: 430px;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+.module-card > .btn,
+.module-card > .pending {
+  margin-top: auto;
+  align-self: flex-start;
+}
+.module-card .pending {
+  padding: 12px 16px;
+  border-color: var(--line);
+  background: var(--paper);
+}
+.announcements-list {
+  border-top: 1px solid var(--line);
+}
+.announcement {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+}
+.announcement time {
+  font-size: 12px;
+  color: var(--blue);
+  padding-top: 7px;
+}
+.announcement h3 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.announcement p {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.85;
+  margin-bottom: 8px;
+}
+@media (max-width: 920px) {
+  .portal-destination {
+    padding: 24px;
+  }
+  .portal-destination h3 {
+    font-size: 23px;
+  }
+}
+@media (max-width: 680px) {
+  .portal-destinations,
+  .lesson-list {
+    grid-template-columns: 1fr;
+  }
+  .portal-destination {
+    min-height: 280px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .portal-destination:last-child {
+    border-bottom: 0;
+  }
+  .module-card {
+    padding: 25px;
+    min-height: 310px;
+  }
+  .module-card h3 {
+    font-size: 27px;
+  }
+  .announcement {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 30px 0;
+  }
+  .announcement h3 {
+    font-size: 26px;
+  }
+}

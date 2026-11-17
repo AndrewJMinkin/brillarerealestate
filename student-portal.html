@@ -68,30 +68,106 @@
           Checking your student account…
         </div>
         <div id="portal-content" hidden>
-          <div class="portal-heading">
-            <div>
-              <span class="eyebrow">Your curriculum</span>
-              <h2>Make yourself<br /><em>at home.</em></h2>
+          <div id="portal-home">
+            <div class="portal-heading">
+              <div>
+                <span class="eyebrow">Your next chapter starts here</span>
+                <h2>
+                  Build your knowledge.<br /><em>Expand your possibilities.</em>
+                </h2>
+              </div>
+              <p>
+                Dive into our course, explore extra resources, and learn all
+                about real estate, development, financial fundamentals in real
+                estate, careers, and more anytime you want!
+              </p>
             </div>
-            <p>
-              Explore your lessons below.<br />Go at your pace. Stay curious.
-            </p>
+            <div class="portal-destinations">
+              <a class="portal-destination" href="#core"
+                ><span class="eyebrow">01 / The foundations</span
+                ><span class="draft-icon" aria-hidden="true">▥</span>
+                <h3>Core Curriculum</h3>
+                <p>Four modules. A strong foundation.</p>
+                <span class="destination-action"
+                  >Explore curriculum <span aria-hidden="true">→</span></span
+                ></a
+              >
+              <a class="portal-destination bonus-destination" href="#bonus"
+                ><span class="eyebrow">02 / Go further</span
+                ><span class="draft-icon" aria-hidden="true">＋</span>
+                <h3>Bonus Modules</h3>
+                <p>More perspectives. New possibilities.</p>
+                <span class="destination-action"
+                  >Explore bonus modules <span aria-hidden="true">→</span></span
+                ></a
+              >
+              <a
+                class="portal-destination news-destination"
+                href="#announcements"
+                ><span class="eyebrow">03 / Stay connected</span
+                ><span class="draft-icon" aria-hidden="true">≡</span>
+                <h3>Announcements</h3>
+                <p>News, workshops, and what’s next.</p>
+                <span class="destination-action"
+                  >Read the latest <span aria-hidden="true">→</span></span
+                ></a
+              >
+            </div>
           </div>
-          <div class="portal-tools">
-            <label for="lesson-search"
-              >Find a lesson<input
-                type="search"
-                id="lesson-search"
-                placeholder="Search lessons…" /></label
-            ><label for="lesson-category"
-              >Explore<select id="lesson-category">
-                <option value="all">All modules</option>
-                <option value="core">Core program</option>
-                <option value="bonus">Bonus modules</option>
-              </select></label
+          <section
+            id="curriculum-view"
+            hidden
+            aria-labelledby="curriculum-title"
+          >
+            <a class="portal-return text-link" href="#home"
+              >← Return to Student Portal</a
             >
-          </div>
-          <div id="lessons" class="lesson-list" aria-live="polite"></div>
+            <div class="portal-heading">
+              <div>
+                <span class="eyebrow" id="curriculum-kicker"
+                  >01 / The foundations</span
+                >
+                <h2 id="curriculum-title" tabindex="-1">Core Curriculum</h2>
+              </div>
+              <p id="curriculum-description"></p>
+            </div>
+            <div class="portal-tools">
+              <label for="lesson-search"
+                >Find a module<input
+                  type="search"
+                  id="lesson-search"
+                  placeholder="Search modules…" /></label
+              ><label for="lesson-category"
+                >Explore<select id="lesson-category">
+                  <option value="all">All modules</option>
+                  <option value="core">Core curriculum</option>
+                  <option value="bonus">Bonus modules</option>
+                </select></label
+              >
+            </div>
+            <div id="lessons" class="lesson-list" aria-live="polite"></div>
+          </section>
+          <section
+            id="announcements-view"
+            hidden
+            aria-labelledby="announcements-title"
+          >
+            <a class="portal-return text-link" href="#home"
+              >← Return to Student Portal</a
+            >
+            <div class="portal-heading">
+              <div>
+                <span class="eyebrow">03 / From the studio</span>
+                <h2 id="announcements-title" tabindex="-1">Announcements</h2>
+              </div>
+              <p>
+                Stay up-to-date with the latest news and upcoming events. Check
+                here regularly to never miss a workshop, course update, or
+                special opportunity.
+              </p>
+            </div>
+            <div id="announcements" class="announcements-list"></div>
+          </section>
         </div>
         <aside class="portal-help">
           <h3>A question is a great starting point.</h3>

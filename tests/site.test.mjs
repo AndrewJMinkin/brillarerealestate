@@ -20,6 +20,7 @@ async function setup(page, script, client) {
 function provider({
   user = { id: "student-1", user_metadata: { first_name: "<b>Alex</b>" } },
   lessons = [],
+  announcements = [],
   error = null,
 } = {}) {
   let callback;
@@ -32,8 +33,8 @@ function provider({
       signOut: async () => ({ error: null }),
       resetPasswordForEmail: async () => ({ error: null }),
     },
-    from: () => ({
-      select: () => ({ order: async () => ({ data: lessons, error }) }),
+    from: (table) => ({
+      select: () => ({ order: async () => ({ data: table === "announcements" ? announcements : lessons, error }) }),
     }),
     emit: (event) => callback(event, null),
   };
@@ -211,4 +212,31 @@ test("database policy grants no anonymous access or browser writes", () => {
   assert.match(sql, /grant select on public.lessons to authenticated/i);
   assert.match(sql, /published = true/);
   assert.doesNotMatch(sql, /grant (insert|update|delete|all)/i);
+});
+test('screenshot curriculum and announcements navigate through all three destinations', async () => {
+  const fixture = JSON.parse(read('tests/portal-fixtures.json'));
+  const client = provider(fixture);
+  const win = await setup('student-portal.html', 'portal.js', client);
+  const doc = win.document;
+  assert.equal(doc.querySelectorAll('.portal-destination').length, 3);
+  assert.equal(doc.getElementById('portal-home').hidden, false);
+  win.location.hash = 'core'; await tick(); await tick();
+  assert.equal(doc.getElementById('curriculum-title').textContent, 'Core Curriculum');
+  assert.equal(doc.querySelectorAll('.module-card').length, 4);
+  assert.match(doc.getElementById('lessons').textContent, /Real Estate Foundations/);
+  win.location.hash = 'bonus'; await tick(); await tick();
+  assert.equal(doc.querySelectorAll('.module-card').length, 6);
+  assert.match(doc.getElementById('lessons').textContent, /Technology in Real Estate/);
+  assert.equal(doc.querySelectorAll('.module-card a').length, 0);
+  win.location.hash = 'announcements'; await tick(); await tick();
+  assert.equal(doc.getElementById('announcements-view').hidden, false);
+  assert.equal(doc.getElementById('curriculum-view').hidden, true);
+  assert.equal(doc.querySelectorAll('.announcement').length, 5);
+  assert.equal(doc.querySelector('.announcement time').dateTime, '2026-05-05');
+  assert.match(doc.querySelector('.announcement').textContent, /End of School Workshop!/);
+  win.location.hash = 'home'; await tick(); await tick();
+  assert.equal(doc.getElementById('portal-home').hidden, false);
+  client.emit('SIGNED_OUT');
+  assert.equal(doc.querySelectorAll('.announcement').length, 0);
+  win.close();
 });
