@@ -1432,8 +1432,8 @@ form .btn {
 .team-panel {
   box-sizing: border-box;
   width: 100%;
-  max-width: 490px;
-  margin: 24px 0 0;
+  max-width: 720px;
+  margin: clamp(24px, 3vw, 36px) 0 0;
   padding: clamp(16px, 2vw, 24px);
   background: var(--pale);
   border: 1px solid var(--line);
@@ -1450,7 +1450,7 @@ form .btn {
 .team-panel img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   display: block;
   object-fit: cover;
 }
@@ -1459,13 +1459,4 @@ form .btn {
   color: var(--blue);
   font-size: 12px;
   line-height: 1.4;
-}
-@media (min-width: 960px) {
-  #about.section {
-    display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-    align-items: center;
-    gap: clamp(30px, 4vw, 64px);
-  }
-  .team-panel { margin: 0; justify-self: end; }
 }
