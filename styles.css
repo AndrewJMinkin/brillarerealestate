@@ -915,8 +915,14 @@ form .btn {
   }
 }
 @media (min-width: 921px) {
+  nav {
+    align-items: baseline;
+  }
+  .has-sub {
+    display: block;
+  }
   .has-sub > a {
-    top: -2px;
+    display: block;
   }
 }
 @media (max-width: 920px) {
