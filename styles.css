@@ -217,16 +217,20 @@ nav .btn {
 .has-sub {
   position: relative;
 }
+.has-sub > a {
+  position: relative;
+  padding-right: 14px;
+}
 .has-sub > a:after {
   content: "";
-  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 0;
   width: 0.42em;
   height: 0.42em;
-  margin-left: 0.6em;
   border: solid currentColor;
   border-width: 0 1px 1px 0;
-  vertical-align: 0.25em;
-  transform: rotate(45deg);
+  transform: translateY(-70%) rotate(45deg);
 }
 .sub {
   position: absolute;
