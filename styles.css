@@ -914,7 +914,15 @@ form .btn {
     padding: 38px;
   }
 }
+@media (min-width: 921px) {
+  .has-sub > a {
+    top: -2px;
+  }
+}
 @media (max-width: 920px) {
+  .has-sub {
+    display: block;
+  }
   .menu {
     display: block;
   }
