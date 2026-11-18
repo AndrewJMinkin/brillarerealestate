@@ -216,6 +216,8 @@ nav .btn {
 }
 .has-sub {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .has-sub > a {
   position: relative;
