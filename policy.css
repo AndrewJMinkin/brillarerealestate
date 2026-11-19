@@ -1,12 +1,9 @@
 
 .policy-layout {display:grid;grid-template-columns:minmax(180px,228px) minmax(0,70ch);gap:clamp(2rem,7vw,7rem);align-items:start;padding-block:3rem 6rem}
 .policy-index {position:sticky;top:108px;color:var(--muted)}
-.policy-index summary {list-style:none;cursor:pointer;text-transform:uppercase;font:600 .65rem/1.5 Inter,Arial,sans-serif;letter-spacing:.18em;border-bottom:1px solid var(--line);padding-bottom:.8rem}
-.policy-index summary::-webkit-details-marker {display:none}
 .policy-links {position:relative;max-height:calc(100dvh - 190px);overflow:auto;scrollbar-width:thin;padding-block:.65rem}
-.policy-links a {display:block;position:relative;padding:.34rem 0 .34rem .7rem;color:var(--muted);font:400 .86rem/1.4 Inter,Arial,sans-serif;text-decoration:none;transition:color .18s}
+.policy-links a {display:block;position:relative;padding:.34rem 0;color:var(--muted);font:400 .86rem/1.4 Inter,Arial,sans-serif;text-decoration:none;transition:color .18s}
 .policy-links a:hover,.policy-links a[aria-current] {color:var(--blue)}
-.policy-links::before {content:"";position:absolute;left:0;top:0;height:var(--marker-height,0px);width:2px;background:var(--blue);transform:translateY(var(--marker-top,0px));transition:transform .22s ease,height .22s ease}
 .policy-copy {min-width:0;line-height:1.75;overflow-wrap:anywhere}
 .policy-copy h2 {font-size:clamp(1.75rem,3vw,2.45rem);line-height:1.14;margin:2.3rem 0 1rem;border-top:1px solid var(--line);padding-top:1.5rem}
 .policy-copy h2:first-child {margin-top:0}
@@ -15,5 +12,8 @@
 .policy-copy li::marker {color:var(--blue)}
 .policy-copy a {color:var(--blue);text-decoration:underline}
 body:has(.policy-layout) .page-hero {padding-block:clamp(2rem,5vw,4rem)}
-@media(max-width:760px){.policy-layout{grid-template-columns:1fr;gap:1.6rem;padding-top:1.5rem}.policy-index{position:static}.policy-index summary::after{content:"+";float:right}.policy-index details[open] summary::after{content:"−"}}
+@media(max-width:760px){.policy-layout{grid-template-columns:1fr;gap:1.6rem;padding-top:1.5rem}.policy-index{position:static}.policy-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:1rem;max-height:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.policy-links::before,.policy-links a{transition:none}}
+
+.policy-index .contents-label{margin:0 0 .45rem;padding-bottom:.7rem;border-bottom:1px solid var(--line);font:600 .65rem/1.5 Inter,Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.policy-links a:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
