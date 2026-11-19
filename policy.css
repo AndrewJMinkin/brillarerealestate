@@ -37,3 +37,16 @@
   .policy-index { position: static; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.policy-index { border: 0; border-right: 1px solid var(--line); background: transparent; padding: 0 1.25rem 0 0; }
+.policy-index summary { font-size: .71rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: .65rem 0; }
+.policy-links { scrollbar-width: thin; }
+.policy-links a { position: relative; border: 0; padding: .42rem .85rem; line-height: 1.45; color: var(--muted); transition: color .18s, background-color .22s; }
+.policy-links a::before { content: ""; position: absolute; left: 0; inset-block: .45rem; width: 2px; background: var(--blue); transform: scaleY(0); transition: transform .22s ease; }
+.policy-links a:hover, .policy-links a[aria-current] { background: rgba(36,88,166,.05); color: var(--blue); }
+.policy-links a[aria-current]::before { transform: scaleY(1); }
+.policy-copy h2 { font-size: clamp(1.9rem,3vw,2.5rem); margin-top: 2.75rem; }
+.policy-copy li + li { margin-top: .35rem; }
+.policy-copy li::marker { color: var(--blue); }
+@media (max-width:760px) { .policy-index { border-right: 0; border-block: 1px solid var(--line); padding: .4rem 0; } }
+@media (prefers-reduced-motion:reduce) { .policy-links a, .policy-links a::before { transition: none; } }
