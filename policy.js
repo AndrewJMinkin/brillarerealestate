@@ -6,6 +6,7 @@ function setMenuLayout() {
 setMenuLayout();
 mobile.addEventListener('change', setMenuLayout);
 const links = [...contents.querySelectorAll('a')];
+for (const link of links) link.textContent = link.textContent.replace(/^\d+\.\s*/, '');
 const headings = links.map(link => document.getElementById(link.hash.slice(1)));
 contents.addEventListener('click', event => {
   const link = event.target.closest('a');
