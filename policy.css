@@ -1,0 +1,39 @@
+.policy-layout {
+  display: grid;
+  grid-template-columns: minmax(210px, 17rem) minmax(0, 70ch);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+  padding-block: 3rem 6rem;
+}
+.policy-index {
+  position: sticky;
+  top: 105px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  padding: 1rem;
+}
+.policy-index summary { cursor: pointer; font-weight: 600; }
+.policy-index details[open] summary { margin-bottom: .75rem; }
+.policy-links { max-height: calc(100dvh - 195px); overflow: auto; }
+.policy-links a {
+  display: block;
+  padding: .5rem .75rem;
+  font-size: .85rem;
+  border-left: 2px solid var(--line);
+}
+.policy-links a:hover, .policy-links a[aria-current] {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: var(--pale);
+}
+.policy-copy { min-width: 0; line-height: 1.75; overflow-wrap: anywhere; }
+.policy-copy h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); margin: 2rem 0 1rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.policy-copy h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
+.policy-copy h3 { margin: 1.4rem 0 .6rem; }
+.policy-copy ul { list-style: disc; padding-left: 1.5rem; }
+.policy-copy a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 760px) {
+  .policy-layout { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
+  .policy-index { position: static; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
